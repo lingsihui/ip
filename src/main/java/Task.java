@@ -1,14 +1,23 @@
+
 public class Task {
-    private String list;
-    private int done;
+    protected String description;
+    protected boolean isDone;
 
-    public Task() {
-        this(null,0);
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
     }
 
-    public Task(String list, int done){
-        this.list = list;
-        this.done = done;
+    public Task(){
+        this.description = null;
+        this.isDone = false;
     }
 
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    public void markAsDone(){
+        this.isDone = true;
+    }
 }

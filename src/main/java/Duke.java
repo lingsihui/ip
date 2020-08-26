@@ -17,7 +17,7 @@ public class Duke {
         //Reading inputs
         int exit = 0;
         int numOfList = 0;
-        String[] list = new String[100];
+        Task list[] = new Task [100] ;
 
         do{
             String line;
@@ -32,11 +32,19 @@ public class Duke {
             else {
                 if (upperLine.equals("LIST")) {
                     for (int i = 0; i < numOfList;i++) {
-                        System.out.println(i+1 + ". " + list[i]);
+                        System.out.println(i+1 + "." + list[i].getStatusIcon() + " " + list[i].description);
                     }
-                } else {
+                }
+                else if(upperLine.contains("DONE")){
+                    String[] words = line.split(" ");
+                    int taskNum = Integer.parseInt(words[1]);
+                    list[taskNum-1].markAsDone();
+                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println(list[taskNum-1].getStatusIcon() + " " + list[taskNum-1].description);
+                }
+                else {
                     System.out.println("added: " + line);
-                    list[numOfList] = line;
+                    list[numOfList] = new Task(line);
                     numOfList++;
                 }
 
