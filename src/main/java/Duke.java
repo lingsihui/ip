@@ -16,11 +16,20 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
         String upperLine = line.toUpperCase();
+        String[] list = new String[100];
+        int i = 0;
         if (upperLine.equals("BYE")){
             System.out.println("Bye. Hope to see you again soon!\n");
         }
+        else if(upperLine.equals("LIST")){
+            for(int value =0 ; value < list.length; value++){
+                System.out.println(i+". "+ list[i]);
+            }
+        }
         else{
-            System.out.print(line);
+            System.out.print("added: " +line);
+            list[i] = line;
+            i++;
         }
 
     }
