@@ -14,10 +14,18 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
     }
 
     public void markAsDone(){
         this.isDone = true;
+    }
+
+    public String getTaskIcon(){
+        return "[ ]";
+    }
+
+    public String getDate(){
+        return " ";
     }
 }
