@@ -64,7 +64,7 @@ public class Duke {
             int taskNum = Integer.parseInt(words[1]);
             tasks[taskNum - 1].markAsDone();
             System.out.println("Nice! I've marked this task as done: ");
-            System.out.println(tasks[taskNum - 1].getStatusIcon() + " " + tasks[taskNum - 1].description);
+            System.out.println(tasks[taskNum - 1]);
             return false;
         } else {
             System.out.println("Invalid Input");
@@ -76,7 +76,7 @@ public class Duke {
         System.out.println("Got it. I've added this task: ");
         tasks[numOfTask] = t;
         numOfTask++;
-        System.out.println("\t" + t.getTaskIcon() + t.getStatusIcon() + t.description + t.getDate());
+        System.out.println("\t" + t);
         System.out.println("Now you have " + numOfTask + " task in the list.");
     }
 
@@ -88,7 +88,7 @@ public class Duke {
             if(t == null){
                 break;
             }
-            System.out.println(numbering + ". " + t.getTaskIcon() + t.getStatusIcon() + t.description + t.getDate());
+            System.out.println(numbering + ". " + t);
         }
     }
 

@@ -4,14 +4,11 @@ public class Event extends Task {
 
     public Event(String description, String at){
         super(description);
-        this.at = at;
+        this.at = at.substring(AT_LENGTH);
     }
 
-    public String getTaskIcon(){
-        return "[E]";
-    }
-
-    public String getDate(){
-        return "(at:" + at.substring(AT_LENGTH) + ")";
+    @Override
+    public String toString(){
+        return "[E]" + super.toString() + " (at:" + at + ")";
     }
 }

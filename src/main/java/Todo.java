@@ -5,7 +5,8 @@ public class Todo extends Task {
         super(description.substring(TODO_LENGTH));
     }
 
-    public String getTaskIcon(){
-        return "[T]";
+    @Override
+    public String toString(){
+        return "[T]" + super.toString();
     }
 }

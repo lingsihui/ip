@@ -4,15 +4,12 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by){
         super(description);
-        this.by = by;
+        this.by = by.substring(BY_LENGTH);
     }
 
-    public String getTaskIcon(){
-        return "[D]";
-    }
-
-    public String getDate(){
-        return "(by:" + by.substring(BY_LENGTH) + ")";
+    @Override
+    public String toString(){
+        return "[D]" + super.toString() + " (by:" + by + ")";
     }
 
 }
