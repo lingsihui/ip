@@ -11,9 +11,10 @@ public class Duke {
     public static void main(String[] args) {
         printGreetingMessage();
         boolean isExited = false;
+        Scanner in = new Scanner(System.in);
         while (!isExited) {
             String line;
-            line = readInput();
+            line = readInput(in);
             isExited = evaluateInput(line);
         }
     }
@@ -29,11 +30,8 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    public static String readInput () {
-        String line;
-        Scanner in = new Scanner(System.in);
-        line = in.nextLine();
-        return line;
+    public static String readInput (Scanner in) {
+        return in.nextLine();
     }
 
     public static boolean evaluateInput (String line){
@@ -63,7 +61,7 @@ public class Duke {
             String[] words = line.split(" ");
             int taskNum = Integer.parseInt(words[1]);
             tasks[taskNum - 1].markAsDone();
-            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println("Nice! I've marked this task as done:");
             System.out.println(tasks[taskNum - 1]);
             return false;
         } else {
@@ -73,7 +71,7 @@ public class Duke {
     }
 
     public static void addTask (Task t){
-        System.out.println("Got it. I've added this task: ");
+        System.out.println("Got it. I've added this task:");
         tasks[numOfTask] = t;
         numOfTask++;
         System.out.println("\t" + t);
