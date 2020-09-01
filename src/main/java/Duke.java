@@ -43,31 +43,47 @@ public class Duke {
             showList();
             return false;
         } else if (upperLine.startsWith("DEADLINE")) {
-            int slashPosition  =  line.indexOf("/");
-            String by = line.substring(slashPosition + 1);
-            String description = line.substring(DEADLINE_LENGTH,slashPosition);
-            addTask(new Deadline(description,by));
+            addDeadline(line);
             return false;
         } else if (upperLine.startsWith("EVENT")) {
-            int slashPosition  =  line.indexOf("/");
-            String at = line.substring(slashPosition + 1);
-            String description = line.substring(EVENT_LENGTH,slashPosition);
-            addTask(new Event(description,at));
+            addEvent(line);
             return false;
         } else if (upperLine.startsWith("BYE")) {
             printByeMessage();
             return true;
         } else if (upperLine.startsWith("DONE")) {
-            String[] words = line.split(" ");
-            int taskNum = Integer.parseInt(words[1]);
-            tasks[taskNum - 1].markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(tasks[taskNum - 1]);
+            markTaskAsDone(line);
             return false;
         } else {
-            System.out.println("Invalid Input");
+            printInvalidInputMessage();
             return false;
         }
+    }
+
+    public static void printInvalidInputMessage() {
+        System.out.println("Invalid Input");
+    }
+
+    public static void markTaskAsDone(String line) {
+        String[] words = line.split(" ");
+        int taskNum = Integer.parseInt(words[1]);
+        tasks[taskNum - 1].markAsDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("\t" + tasks[taskNum - 1]);
+    }
+
+    public static void addEvent(String line) {
+        int slashPosition  =  line.indexOf("/");
+        String at = line.substring(slashPosition + 1);
+        String description = line.substring(EVENT_LENGTH,slashPosition);
+        addTask(new Event(description,at));
+    }
+
+    public static void addDeadline(String line) {
+        int slashPosition  =  line.indexOf("/");
+        String by = line.substring(slashPosition + 1);
+        String description = line.substring(DEADLINE_LENGTH,slashPosition);
+        addTask(new Deadline(description,by));
     }
 
     public static void addTask (Task t){
