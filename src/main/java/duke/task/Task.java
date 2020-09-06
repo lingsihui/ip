@@ -1,3 +1,4 @@
+package duke.task;
 
 public abstract class Task {
     protected String description;
@@ -22,4 +23,8 @@ public abstract class Task {
     }
 
     public abstract void printInvalid();
+
+    public int getDescriptionLength() {
+        return description.length();
+    }
 }
