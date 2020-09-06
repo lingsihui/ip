@@ -1,22 +1,25 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static final int DEADLINE_LENGTH = 8;
-    public static final int EVENT_LENGTH = 5;
     public static final int TASK_SIZE = 100;
+    public static final int MIN_DESCRIPTION_LENGTH = 2;
 
     private static Task[] tasks = new Task[TASK_SIZE];
     private static int numOfTask = 0;
 
-
     public static void main(String[] args) {
         printGreetingMessage();
-        boolean isExited = false;
+        boolean isExit = false;
         Scanner in = new Scanner(System.in);
-        while (!isExited) {
-            String line;
-            line = readInput(in);
-            isExited = evaluateInput(line);
+        while (!isExit) {
+            try {
+                String line;
+                line = readInput(in);
+                isExit = evaluateInput(line);
+            }catch(DukeException e){
+                printInvalidInputMessage();
+                isExit = false;
+            }
         }
     }
 
@@ -35,7 +38,7 @@ public class Duke {
         return in.nextLine();
     }
 
-    public static boolean evaluateInput (String line){
+    public static boolean evaluateInput (String line) throws DukeException{
         String upperLine = line.toUpperCase();
         if (upperLine.startsWith("TODO")) {
             addTask(new Todo(line));
@@ -56,50 +59,91 @@ public class Duke {
             markTaskAsDone(line);
             return false;
         } else {
-            printInvalidInputMessage();
-            return false;
+            throw new DukeException();
+        }
+    }
+
+    public static void addEvent(String line) {
+        try {
+            if (!line.contains("/at")){
+                throw new DukeException();
+            }
+            int slashPosition = line.indexOf("/");
+            addTask(new Event(line,slashPosition));
+        } catch (DukeException e) {
+            System.out.println("OOPS! Invalid Event Input");
+        }
+    }
+
+    public static void addDeadline(String line) {
+        try {
+            if (!line.contains("/by")){
+                throw new DukeException();
+            }
+            int slashPosition = line.indexOf("/");
+            addTask(new Deadline(line,slashPosition));
+        } catch (DukeException e) {
+            System.out.println("OOPS! Invalid Deadline Input");
         }
     }
 
     public static void printInvalidInputMessage() {
-        System.out.println("Invalid Input");
+        System.out.println("Opps! Sorry I don't know what you mean! :(");
+    }
+
+    public static void addTask(Task t){
+        try {
+            if (t.description.length() < MIN_DESCRIPTION_LENGTH) {
+                throw new DukeException();
+            }
+            tasks[numOfTask] = t;
+            numOfTask++;
+            System.out.println("Got it. I've added this task:");
+            System.out.println("\t" + t);
+            System.out.println("Now you have " + numOfTask + " task in the list.");
+
+        }catch(DukeException e){
+            t.printInvalid();
+        }
     }
 
     public static void markTaskAsDone(String line) {
+        try {
+            int taskNum = processTaskToMark(line);
+            tasks[taskNum - 1].markAsDone();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println("\t" + tasks[taskNum - 1]);
+        } catch (DukeException e) {
+            System.out.println("OOPS! Invalid task to mark!");
+        }
+    }
+
+    public static int processTaskToMark(String line) throws DukeException {
+        if(!line.contains(" ")){
+            throw new DukeException();
+        }
         String[] words = line.split(" ");
+        if(words.length < 2){
+            throw new DukeException();
+        }
         int taskNum = Integer.parseInt(words[1]);
-        tasks[taskNum - 1].markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("\t" + tasks[taskNum - 1]);
-    }
-
-    public static void addEvent(String line) {
-        int slashPosition  =  line.indexOf("/");
-        String at = line.substring(slashPosition + 1);
-        String description = line.substring(EVENT_LENGTH,slashPosition);
-        addTask(new Event(description,at));
-    }
-
-    public static void addDeadline(String line) {
-        int slashPosition  =  line.indexOf("/");
-        String by = line.substring(slashPosition + 1);
-        String description = line.substring(DEADLINE_LENGTH,slashPosition);
-        addTask(new Deadline(description,by));
-    }
-
-    public static void addTask (Task t){
-        System.out.println("Got it. I've added this task:");
-        tasks[numOfTask] = t;
-        numOfTask++;
-        System.out.println("\t" + t);
-        System.out.println("Now you have " + numOfTask + " task in the list.");
+        if(taskNum > numOfTask ){
+            throw new DukeException();
+        }
+        return taskNum;
     }
 
     public static void showList () {
-        int numbering = 0;
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < numOfTask; i++) {
-            System.out.println((i+1) + ". " + tasks[i]);
+        try {
+            if(numOfTask == 0){
+                throw new DukeException();
+            }
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < numOfTask; i++) {
+                System.out.println((i + 1) + ". " + tasks[i]);
+            }
+        }catch (DukeException e){
+            System.out.println("Your list is empty! :0");
         }
     }
 
