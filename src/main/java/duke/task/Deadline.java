@@ -1,6 +1,8 @@
+package duke.task;
+
 public class Deadline extends Task {
     private static final int BY_LENGTH = 3;
-    public static final int DEADLINE_LENGTH = 9;
+    public static final int DEADLINE_LENGTH = 8;
     protected String by;
 
     public Deadline(String description, int slashPosition){
@@ -16,5 +18,9 @@ public class Deadline extends Task {
     @Override
     public void printInvalid(){
         System.out.println("OOPS! Description of DEADLINE cannot be empty!");
+    }
+
+    public int getDescriptionLength() {
+        return description.length();
     }
 }
