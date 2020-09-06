@@ -3,8 +3,9 @@ import java.util.Scanner;
 public class Duke {
     public static final int DEADLINE_LENGTH = 8;
     public static final int EVENT_LENGTH = 5;
+    public static final int TASK_SIZE = 100;
 
-    private static Task[] tasks = new Task[100];
+    private static Task[] tasks = new Task[TASK_SIZE];
     private static int numOfTask = 0;
 
 
@@ -97,12 +98,8 @@ public class Duke {
     public static void showList () {
         int numbering = 0;
         System.out.println("Here are the tasks in your list:");
-        for (Task t: tasks){
-            numbering++;
-            if(t == null){
-                break;
-            }
-            System.out.println(numbering + ". " + t);
+        for (int i = 0; i < numOfTask; i++) {
+            System.out.println((i+1) + ". " + tasks[i]);
         }
     }
 
