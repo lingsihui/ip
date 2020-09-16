@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static final int MIN_DESCRIPTION_LENGTH = 2;
-    public static final String FILE_PATH = "/Users/shiho/Desktop/ip/data/duke.txt";
+    public static final String FILE_PATH = "ip/data/duke.txt";
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
