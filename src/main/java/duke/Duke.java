@@ -65,6 +65,9 @@ public class Duke {
         } else if (upperLine.startsWith("DONE")) {
             markTaskAsDone(line);
             return false;
+        } else if (upperLine.startsWith("DELETE")){
+            deleteTaskAsDone(line);
+            return false;
         } else {
             throw new DukeException();
         }
@@ -123,6 +126,25 @@ public class Duke {
         } catch (DukeException e) {
             System.out.println("OOPS! Invalid task to mark!");
         }
+    }
+
+    public static void deleteTaskAsDone(String line){
+        try {
+            int taskNum = processTaskToMark(line);
+            System.out.println("Noted I have removed this task!");
+            System.out.println("\t"+tasks[taskNum -1]);
+            deleteTask(taskNum - 1);
+            System.out.println("Now you have " + numOfTask + " task in the list.");
+        }catch (DukeException e) {
+            System.out.println("OOPS! Invalid task to delete!");
+        }
+    }
+
+    public static void deleteTask(int taskNum){
+        for(int i = taskNum; i< numOfTask;i++){
+            tasks[taskNum] = tasks[taskNum+1];
+        }
+        numOfTask = numOfTask - 1;
     }
 
     public static int processTaskToMark(String line) throws DukeException {
