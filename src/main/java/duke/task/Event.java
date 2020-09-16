@@ -19,6 +19,18 @@ public class Event extends Task {
         System.out.println("OOPS! Description of EVENT cannot be empty!");
     }
 
+    public String getTaskType(){
+        return "Event";
+    }
+
+    public String getDescription(){
+        return this.description;
+    }
+
+    public String getAt(){
+        return this.at;
+    }
+
     public int getDescriptionLength() {
         return description.length();
     }

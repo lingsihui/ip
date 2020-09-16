@@ -1,0 +1,8 @@
+|1| Deadline return book /by Monday
+|1| Todo read book 
+|1| Deadline return book /by monday
+|1| Event meeting /at sunday
+|1| Todo shopping
+|0| Todo read book 
+|0| Deadline return book /by monday
+|1| Event meeting /at sunday
