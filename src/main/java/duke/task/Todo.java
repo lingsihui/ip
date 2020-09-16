@@ -17,6 +17,14 @@ public class Todo extends Task {
         System.out.println("OOPS! Description of TODO cannot be empty!");
     }
 
+    public String getTaskType(){
+        return "Todo";
+    }
+
+    public String getDescription(){
+        return this.description;
+    }
+
     public int getDescriptionLength() {
         return description.length();
     }

@@ -2,3 +2,23 @@
 |1| Todo read book 
 |0| Deadline return book /by monday
 |0| Event meeting /at sunday
+|1| Deadline return book /by Monday
+|1| Todo read book 
+|0| Deadline return book /by monday
+|0| Event meeting /at sunday
+|1| Deadline return book /by Monday
+|1| Todo read book 
+|0| Deadline return book /by monday
+|0| Event meeting /at sunday
+|1| Deadline return book /by Monday
+|1| Todo read book 
+|0| Deadline return book /by monday
+|0| Event meeting /at sunday
+|1| Deadline return book /by Monday
+|1| Todo read book 
+|0| Deadline return book /by monday
+|0| Event meeting /at sunday
+|1| Deadline return book /by Monday
+|1| Todo read book 
+|0| Deadline return book /by monday
+|0| Event meeting /at sunday

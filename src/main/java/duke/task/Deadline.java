@@ -20,6 +20,17 @@ public class Deadline extends Task {
         System.out.println("OOPS! Description of DEADLINE cannot be empty!");
     }
 
+    public String getTaskType(){
+        return "Deadline";
+    }
+    public String getDescription(){
+        return this.description;
+    }
+
+    public String getBy(){
+        return this.by;
+    }
+
     public int getDescriptionLength() {
         return description.length();
     }
