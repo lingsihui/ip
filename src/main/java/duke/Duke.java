@@ -5,14 +5,12 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static final int TASK_SIZE = 100;
     public static final int MIN_DESCRIPTION_LENGTH = 2;
-
-    private static Task[] tasks = new Task[TASK_SIZE];
-    private static int numOfTask = 0;
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         printGreetingMessage();
@@ -65,6 +63,9 @@ public class Duke {
         } else if (upperLine.startsWith("DONE")) {
             markTaskAsDone(line);
             return false;
+        } else if (upperLine.startsWith("DELETE")){
+            deleteTask(line);
+            return false;
         } else {
             throw new DukeException();
         }
@@ -103,11 +104,10 @@ public class Duke {
             if (t.getDescriptionLength() < MIN_DESCRIPTION_LENGTH) {
                 throw new DukeException();
             }
-            tasks[numOfTask] = t;
-            numOfTask++;
+            tasks.add(t);
             System.out.println("Got it. I've added this task:");
             System.out.println("\t" + t);
-            System.out.println("Now you have " + numOfTask + " task in the list.");
+            System.out.println("Now you have " + tasks.size() + " task in the list.");
 
         }catch(DukeException e){
             t.printInvalid();
@@ -116,16 +116,28 @@ public class Duke {
 
     public static void markTaskAsDone(String line) {
         try {
-            int taskNum = processTaskToMark(line);
-            tasks[taskNum - 1].markAsDone();
+            int taskNum = processTask(line);
+            tasks.get(taskNum-1).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println("\t" + tasks[taskNum - 1]);
+            System.out.println("\t" + tasks.get(taskNum - 1));
         } catch (DukeException e) {
             System.out.println("OOPS! Invalid task to mark!");
         }
     }
 
-    public static int processTaskToMark(String line) throws DukeException {
+    public static void deleteTask(String line){
+        try {
+            int taskNum = processTask(line);
+            System.out.println("Noted I have removed this task!");
+            System.out.println("\t"+tasks.get(taskNum-1));
+            tasks.remove(taskNum-1);
+            System.out.println("Now you have " + tasks.size() + " task in the list.");
+        }catch (DukeException e) {
+            System.out.println("OOPS! Invalid task to delete!");
+        }
+    }
+
+    public static int processTask(String line) throws DukeException {
         if(!line.contains(" ")){
             throw new DukeException();
         }
@@ -134,7 +146,7 @@ public class Duke {
             throw new DukeException();
         }
         int taskNum = Integer.parseInt(words[1]);
-        if(taskNum > numOfTask ){
+        if(taskNum > tasks.size() ){
             throw new DukeException();
         }
         return taskNum;
@@ -142,12 +154,12 @@ public class Duke {
 
     public static void showList () {
         try {
-            if(numOfTask == 0){
+            if(tasks.size() == 0){
                 throw new DukeException();
             }
             System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < numOfTask; i++) {
-                System.out.println((i + 1) + ". " + tasks[i]);
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + ". " + tasks.get(i));
             }
         }catch (DukeException e){
             System.out.println("Your list is empty! :0");
