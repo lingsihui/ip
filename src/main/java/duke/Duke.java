@@ -202,12 +202,10 @@ public class Duke {
             System.out.println("\t" + tasks.get(taskNum - 1));
         } catch (DukeException e) {
             System.out.println("OOPS! Invalid task to mark!");
-        } catch (IOException e){
-            System.out.println("OOPS! An error had occurred");
         }
     }
 
-    public static void updateTaskToFile() throws IOException{
+    public static void updateTaskToFile() {
         saveTaskToFile("data/duke.txt",tasks.get(0), false);
         for(int i = 1; i< tasks.size();i++){
             saveTaskToFile("data/duke.txt",tasks.get(i),true);
@@ -220,6 +218,7 @@ public class Duke {
             System.out.println("Noted I have removed this task!");
             System.out.println("\t"+tasks.get(taskNum-1));
             tasks.remove(taskNum-1);
+            updateTaskToFile();
             System.out.println("Now you have " + tasks.size() + " task in the list.");
         }catch (DukeException e) {
             System.out.println("OOPS! Invalid task to delete!");
