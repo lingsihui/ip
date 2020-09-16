@@ -5,3 +5,4 @@
 |1| Todo shopping
 |0| Todo read book 
 |0| Deadline return book /by monday
+|0| Todo read book

@@ -17,6 +17,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static final int MIN_DESCRIPTION_LENGTH = 2;
+    public static final String FILE_PATH = "/Users/shiho/Desktop/ip/data/duke.txt";
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -38,7 +39,7 @@ public class Duke {
 
     public static void loadTaskFile() {
         try {
-            loadFileContents("data/duke.txt");
+            loadFileContents(FILE_PATH);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (DukeException e) {
@@ -157,7 +158,7 @@ public class Duke {
             System.out.println("Got it. I've added this task:");
             System.out.println("\t" + t);
             System.out.println("Now you have " + tasks.size() + " task in the list.");
-            saveTaskToFile("data/duke.txt",t,true);
+            saveTaskToFile(FILE_PATH,t,true);
         }catch(DukeException e){
             t.printInvalid();
         }
@@ -206,9 +207,9 @@ public class Duke {
     }
 
     public static void updateTaskToFile() {
-        saveTaskToFile("data/duke.txt",tasks.get(0), false);
+        saveTaskToFile(FILE_PATH,tasks.get(0), false);
         for(int i = 1; i< tasks.size();i++){
-            saveTaskToFile("data/duke.txt",tasks.get(i),true);
+            saveTaskToFile(FILE_PATH,tasks.get(i),true);
         }
     }
 
