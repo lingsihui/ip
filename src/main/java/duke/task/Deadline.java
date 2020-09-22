@@ -15,16 +15,11 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by:" + by + ")";
     }
 
-    @Override
-    public void printInvalid(){
-        System.out.println("OOPS! Description of DEADLINE cannot be empty!");
-    }
-
-    public String getTaskType(){
-        return "Deadline";
-    }
     public String getDescription(){
         return this.description;
+    }
+    public String getType(){
+        return "Deadline";
     }
 
     public String getBy(){

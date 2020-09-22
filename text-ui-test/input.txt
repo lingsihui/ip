@@ -4,4 +4,6 @@ event meeting /at Sunday
 list
 done 2
 list
+delete 2
+list
 bye

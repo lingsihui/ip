@@ -33,13 +33,11 @@ public abstract class Task {
     public String toString(){
         return getStatusIcon() + description;
     }
-    public abstract String getTaskType();
-
-    public abstract void printInvalid();
 
     public String getDescription(){
         return this.description;
     }
+    public abstract String getType();
 
     public int getDescriptionLength() {
         return description.length();

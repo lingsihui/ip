@@ -15,20 +15,15 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at:" + at + ")";
     }
 
-    public void printInvalid(){
-        System.out.println("OOPS! Description of EVENT cannot be empty!");
-    }
-
-    public String getTaskType(){
-        return "Event";
-    }
-
     public String getDescription(){
         return this.description;
     }
 
     public String getAt(){
         return this.at;
+    }
+    public String getType(){
+        return "Event";
     }
 
     public int getDescriptionLength() {
