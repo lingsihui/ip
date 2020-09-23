@@ -4,7 +4,12 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.time.DateTimeException;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Represents a Task list A <code>Task List</code> object contains the task list
@@ -44,10 +49,28 @@ public class TaskList {
                 throw new DukeException();
             }
             int slashPosition = line.indexOf("/");
-            addTask(new Event(line,slashPosition),ui,storage,type);
+            String formattedLine = formatDate(line,slashPosition);
+            addTask(new Event(formattedLine,slashPosition),ui,storage,type);
         } catch (DukeException e) {
-            System.out.println("OOPS! Invalid Event Input");
+            ui.printInvalidEventOrDeadlineMessage("Event");
+        } catch (DateTimeException e){
+            ui.printInvalidDateMessage();
         }
+    }
+
+    public String formatDate(String line, int slashPosition) throws DateTimeException{
+        String  dateLine = line.substring(slashPosition);
+        String[] dates = dateLine.split(" ");
+        String oldDate;
+        for (String s : dates) {
+            if (s.contains("-")) {
+                oldDate = s;
+                LocalDate date = LocalDate.parse(oldDate);
+                String newDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                return line.replace(oldDate, newDate);
+            }
+        }
+        return line;
     }
     /**
      * Process the user input of a Deadline task to task description and by description.
@@ -57,15 +80,18 @@ public class TaskList {
      * @param ui User interface to print error.
      * @param storage Storage parameter to be passed to addTask().
      */
-    public void processDeadline(String line,Ui ui, Storage storage, String type) {
+    public void processDeadline (String line, Ui ui, Storage storage, String type){
         try {
-            if (!line.contains("/by")){
+            if (!line.contains("/by")) {
                 throw new DukeException();
             }
             int slashPosition = line.indexOf("/");
-            addTask(new Deadline(line,slashPosition),ui,storage,type);
+            String formattedLine = formatDate(line, slashPosition);
+            addTask(new Deadline(formattedLine, slashPosition), ui, storage, type);
         } catch (DukeException e) {
-            System.out.println("OOPS! Invalid Deadline Input");
+            ui.printInvalidEventOrDeadlineMessage("Deadline");
+        } catch (DateTimeException e){
+            ui.printInvalidDateMessage();
         }
     }
     /**
@@ -78,7 +104,7 @@ public class TaskList {
      * @param storage Storage to update file.
      * @param type Type of the task to add.
      */
-    public void addTask(Task t,Ui ui,Storage storage,String type){
+    public void addTask (Task t, Ui ui, Storage storage, String type){
         try {
             if (t.getDescriptionLength() < MIN_DESCRIPTION_LENGTH) {
                 throw new DukeException();
@@ -140,7 +166,7 @@ public class TaskList {
         }
         String[] words = line.split(" ");
         int taskNum = Integer.parseInt(words[1]);
-        if(taskNum > tasks.size() ){
+        if (taskNum > tasks.size()) {
             throw new DukeException();
         }
         return taskNum;
@@ -151,15 +177,32 @@ public class TaskList {
      *
      * @param ui  User Interface to show the list and error message.
      */
-    public void showList (Ui ui) {
+    public void showList (Ui ui){
         try {
-            if(tasks.size() == 0){
+            if (tasks.size() == 0) {
                 throw new DukeException();
             }
             ui.printTasksInList(tasks);
-        }catch (DukeException e){
+        } catch (DukeException e) {
             ui.printListIsEmptyMessage();
         }
     }
 
+    public void showDateList (Ui ui, String date){
+        try {
+            String formattedDate = formatDate(date,0);
+            ArrayList<Task> filteredDateList;
+            filteredDateList = (ArrayList<Task>) tasks.stream()
+                    .filter((t) -> t.getBy().contains(formattedDate) || t.getAt().contains(formattedDate))
+                    .collect(toList());
+            if (filteredDateList.size() == 0) {
+                throw new DukeException();
+            }
+            ui.printTasksInList(filteredDateList);
+        } catch (DukeException e) {
+            ui.printListIsEmptyMessage();
+        } catch (DateTimeException e){
+            ui.printInvalidDateMessage();
+        }
+    }
 }

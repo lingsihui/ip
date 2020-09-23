@@ -13,4 +13,11 @@ list
 delete 2
 delete 5
 list
+event meeting /at 2019-10
+event meeting /at 2019-10-15
+deadline meeting /by 2019-10
+deadline meeting /by 2019-10-15
+date 2019-10-15
+date 2019-10-1
+date 2019-10-11
 bye

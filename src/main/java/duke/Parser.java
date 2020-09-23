@@ -32,6 +32,8 @@ public class Parser {
             return new DoneCommand(line);
         } else if (upperLine.startsWith("DELETE")){
             return new DeleteCommand(line);
+        } else if (upperLine.startsWith("DATE")){
+            return new DateCommand(line);
         } else {
             throw new DukeException();
         }

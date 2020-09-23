@@ -74,4 +74,11 @@ public class Ui {
     public void printErrorToSaveTaskToFile(IOException e){
         System.out.println("Something went wrong: " + e.getMessage());
     }
+    public void printInvalidDateMessage(){
+        System.out.println("OOPS! Invalid Date Input");
+        System.out.println("Input Date in this format YYYY-MM-DD");
+    }
+    public void printInvalidEventOrDeadlineMessage(String type){
+        System.out.println("OOPS! Invalid " + type + " Input");
+    }
 }
