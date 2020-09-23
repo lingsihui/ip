@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.DateTimeException;
 
+import static java.util.stream.Collectors.toList;
+
 public class TaskList {
     private ArrayList<Task> tasks;
     public final int MIN_DESCRIPTION_LENGTH = 2;
@@ -26,7 +28,7 @@ public class TaskList {
                 throw new DukeException();
             }
             int slashPosition = line.indexOf("/");
-            String formattedLine = formatDateAndTime(line,slashPosition);
+            String formattedLine = formatDate(line,slashPosition);
             addTask(new Event(formattedLine,slashPosition),ui,storage,type);
         } catch (DukeException e) {
             ui.printInvalidEventOrDeadlineMessage("Event");
@@ -35,16 +37,16 @@ public class TaskList {
         }
     }
 
-    public String formatDateAndTime (String line, int slashPosition) throws  DateTimeException, DukeException{
+    public String formatDate(String line, int slashPosition) throws DateTimeException{
         String  dateLine = line.substring(slashPosition);
         String[] dates = dateLine.split(" ");
-        String oldDate = dates[0];
-        for(int i = 0 ; i < dates.length ;i++){
-            if (dates[i].contains("-")){
-                oldDate = dates[i];
+        String oldDate;
+        for (String s : dates) {
+            if (s.contains("-")) {
+                oldDate = s;
                 LocalDate date = LocalDate.parse(oldDate);
                 String newDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-                return line.replace(oldDate,newDate);
+                return line.replace(oldDate, newDate);
             }
         }
         return line;
@@ -56,7 +58,7 @@ public class TaskList {
                 throw new DukeException();
             }
             int slashPosition = line.indexOf("/");
-            String formattedLine = formatDateAndTime(line, slashPosition);
+            String formattedLine = formatDate(line, slashPosition);
             addTask(new Deadline(formattedLine, slashPosition), ui, storage, type);
         } catch (DukeException e) {
             ui.printInvalidEventOrDeadlineMessage("Deadline");
@@ -123,6 +125,24 @@ public class TaskList {
             ui.printTasksInList(tasks);
         } catch (DukeException e) {
             ui.printListIsEmptyMessage();
+        }
+    }
+
+    public void showDateList (Ui ui, String date){
+        try {
+            String formattedDate = formatDate(date,0);
+            ArrayList<Task> filteredDateList;
+            filteredDateList = (ArrayList<Task>) tasks.stream()
+                    .filter((t) -> t.getBy().contains(formattedDate) || t.getAt().contains(formattedDate))
+                    .collect(toList());
+            if (filteredDateList.size() == 0) {
+                throw new DukeException();
+            }
+            ui.printTasksInList(filteredDateList);
+        } catch (DukeException e) {
+            ui.printListIsEmptyMessage();
+        } catch (DateTimeException e){
+            ui.printInvalidDateMessage();
         }
     }
 
