@@ -1,2 +1,4 @@
 |0| Todo read book
 |0| Event meeting /at Sunday
+|0| Event meeting /at Oct 15 2019
+|0| Deadline meeting /by Oct 15 2019
