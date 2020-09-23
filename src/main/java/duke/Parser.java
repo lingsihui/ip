@@ -2,10 +2,20 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Represent a parser to parse the user input.
+ */
 public class Parser {
     public Parser(){
     }
-
+    /**
+     * Returns a command class corresponding to the user input.
+     * If the user input does not associate with any command, a Duke exception is thrown.
+     *
+     * @param line  user input.
+     * @return Command.
+     * @throws DukeException  If user input does not start with any commands.
+     */
     public Command evaluateInput(String line) throws DukeException {
         String upperLine = line.toUpperCase();
         if(upperLine.startsWith("TODO")){

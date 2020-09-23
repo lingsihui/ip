@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage file in Duke. A <code>Storage</code> object corresponds to
+ * any methods interacting with files. e.g., <code>load files, update files</code>
+ */
 public class Storage {
     public static final int LENGTH_OF_DONE_SYMBOL = 4;
     public static final int LENGTH_OF_NOT_DONE_SYMBOL = 4;
@@ -19,11 +23,27 @@ public class Storage {
 
     private String filePath;
 
-    //Constructor
+    /**
+     * Constructor.
+     * Initialise filepath.
+     *
+     * @param filePath  File path of the file to store data.
+     */
     public Storage(String filePath){
         this.filePath = filePath;
     }
-    //Return an Array List of the tasks in file
+    /**
+     * Returns Array List of the tasks stored in the file.
+     * If the files in the is not in the correct format, Duke Exception will be thrown.
+     * e.g. files does not start with symbol |0| or |1|.
+     * format of file : e.g. DONE_SYMBOL TASK_TYPE Description /AT Description.
+     * e.g. |0| Deadline return book /by monday.
+     * * e.g. files does not start with Deadline,Event or Todo.
+     *
+     * @return ArrayList<Task> of tasks stored in the file.
+     * @throws IOException  If file has an error.
+     * @throws DukeException  If file format is not correct.
+     */
     public ArrayList<Task> load() throws IOException, DukeException{
         File f = new File(filePath); // create a File for the given file path
         f.getParentFile().mkdirs();
@@ -43,8 +63,7 @@ public class Storage {
         }
         return storageTasks;
     }
-    //add File task to ArrayList
-    public void addFileTask(ArrayList<Task> storageTasks,String line) throws DukeException{
+    private void addFileTask(ArrayList<Task> storageTasks,String line) throws DukeException{
         if(line.startsWith("Deadline")){
             int slashPosition = line.indexOf("/");
             storageTasks.add(new Deadline(line ,slashPosition));
@@ -57,16 +76,24 @@ public class Storage {
             throw new DukeException();
         }
     }
-
-    public void saveTaskToFile(String type,Task t, boolean isAppend){
+    /**
+     * Save tasks in task list to file in the correct format.
+     * If task cannot be written into file, an error message will be shown.
+     * format: DONE_SYMBOL TYPE task_description at/by_description
+     *
+     * @param type  String type of Task.
+     * @param t Class Task of the task to add.
+     * @param isAppend Boolean of whether the file should overwrite or append to file.
+     * @param ui  User interface to print error message.
+     */
+    public void saveTaskToFile(String type,Task t, boolean isAppend,Ui ui){
         try {
             writeToFile(type,t,isAppend);
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            ui.printErrorToSaveTaskToFile(e);
         }
     }
-
-    public void writeToFile(String type, Task taskToAdd,boolean isAppend) throws IOException {
+    private void writeToFile(String type, Task taskToAdd,boolean isAppend) throws IOException {
         FileWriter fw = new FileWriter(this.filePath,isAppend);
         String done;
         if (taskToAdd.getIsDone()){
@@ -86,11 +113,16 @@ public class Storage {
         }
         fw.close();
     }
-
-    public void updateTaskToFile(ArrayList<Task> tasks) {
-        saveTaskToFile(tasks.get(0).getType(),tasks.get(0), false);
+    /**
+     * Update tasks list in the file.
+     *
+     * @param tasks  String type of Task.
+     * @param ui User interface to be passed to saveTaskToFile.
+     */
+    public void updateTaskToFile(ArrayList<Task> tasks,Ui ui) {
+        saveTaskToFile(tasks.get(0).getType(),tasks.get(0), false, ui);
         for(int i = 1; i< tasks.size();i++){
-            saveTaskToFile(tasks.get(i).getType(),tasks.get(i),true);
+            saveTaskToFile(tasks.get(i).getType(),tasks.get(i),true, ui);
         }
     }
 
