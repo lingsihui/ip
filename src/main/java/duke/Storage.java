@@ -6,7 +6,6 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ public class Storage {
     public Storage(String filePath){
         this.filePath = filePath;
     }
-
     //Return an Array List of the tasks in file
     public ArrayList<Task> load() throws IOException, DukeException{
         File f = new File(filePath); // create a File for the given file path
@@ -45,7 +43,6 @@ public class Storage {
         }
         return storageTasks;
     }
-
     //add File task to ArrayList
     public void addFileTask(ArrayList<Task> storageTasks,String line) throws DukeException{
         if(line.startsWith("Deadline")){

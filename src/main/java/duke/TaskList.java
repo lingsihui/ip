@@ -1,44 +1,44 @@
 package duke;
 
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
-    public final int MIN_DESCRIPTION_LENGTH = 1;
-
+    public final int MIN_DESCRIPTION_LENGTH = 2;
 
     public TaskList(ArrayList<Task> tasks){
         this.tasks = tasks;
     }
-
     public TaskList(){
         this.tasks = new ArrayList<>();
     }
 
-    public int processEvent(String line) {
+    public void processEvent(String line,Ui ui, Storage storage, String type) {
         try {
             if (!line.contains("/at")){
                 throw new DukeException();
             }
-            return line.indexOf("/");
+            int slashPosition = line.indexOf("/");
+            addTask(new Event(line,slashPosition),ui,storage,type);
         } catch (DukeException e) {
             System.out.println("OOPS! Invalid Event Input");
         }
-        return -1;
     }
 
-    public int processDeadline(String line) {
+    public void processDeadline(String line,Ui ui, Storage storage, String type) {
         try {
             if (!line.contains("/by")){
                 throw new DukeException();
             }
-            return line.indexOf("/");
+            int slashPosition = line.indexOf("/");
+            addTask(new Deadline(line,slashPosition),ui,storage,type);
         } catch (DukeException e) {
             System.out.println("OOPS! Invalid Deadline Input");
         }
-        return -1;
     }
 
     public void addTask(Task t,Ui ui,Storage storage,String type){

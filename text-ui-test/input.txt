@@ -1,9 +1,16 @@
 todo read book
 deadline return book /by Monday
 event meeting /at Sunday
-list
+hello
+todo
+event
+deadline
+event /at
+deadline /by
 done 2
+done 5
 list
 delete 2
+delete 5
 list
 bye
