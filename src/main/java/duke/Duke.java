@@ -4,6 +4,10 @@ import duke.command.Command;
 
 import java.io.IOException;
 
+/**
+ * Represents the main class. A <code>Duke</code> object contains the
+ * main method.
+ */
 public class Duke {
     public static final String FILE_PATH = "data/duke.txt";
 
@@ -11,7 +15,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
-    public Duke(String filePath){
+    private Duke(String filePath){
         ui = new Ui();
         storage = new Storage(filePath);
         try{
@@ -20,12 +24,12 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         } catch (IOException e){
-            ui.showFileNotFoundError();
+            ui.showErrorInLoadingFile();
             tasks = new TaskList();
         }
     }
 
-    public void run() {
+    private void run() {
         ui.printGreetingMessage();
         boolean isExit = false;
         while (!isExit) {
@@ -42,7 +46,12 @@ public class Duke {
             }
         }
     }
-
+    /**
+     * Load the file contents and create a new Task list by initializing the Duke Object.
+     * Start the program by running the duke method.
+     *
+     * @param args
+     */
     public static void main(String[] args){
         new Duke(FILE_PATH).run();
     }
