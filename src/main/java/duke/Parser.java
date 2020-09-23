@@ -24,6 +24,8 @@ public class Parser {
             return new DeleteCommand(line);
         } else if (upperLine.startsWith("FIND")){
             return new FindCommand(line);
+        } else if (upperLine.startsWith("DATE")){
+            return new DateCommand(line);
         } else {
             throw new DukeException();
         }

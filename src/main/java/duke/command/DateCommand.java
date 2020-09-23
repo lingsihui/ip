@@ -4,17 +4,17 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-public class FindCommand extends Command{
-    public static final int FIND_LENGTH = 5;
-    private String objectToFind;
+public class DateCommand extends Command{
+    public static final int DATE_LENGTH = 5;
+    private String date;
 
-    public FindCommand(String line){
-        objectToFind = line.substring(FIND_LENGTH);
+    public DateCommand(String line){
+        this.date = line.substring(DATE_LENGTH);
     }
 
     @Override
     public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
-        tasks.findSpecificTask(objectToFind,ui);
+        tasks.showDateList(ui,date);
     }
 
     @Override
