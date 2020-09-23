@@ -1,1 +1,4 @@
 |0| Todo read book 
+|0| Todo read book
+|0| Deadline return book /by monday
+|0| Event meeting /at tuesday

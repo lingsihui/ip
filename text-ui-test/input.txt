@@ -13,4 +13,6 @@ list
 delete 2
 delete 5
 list
+find h
+find book
 bye

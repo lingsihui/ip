@@ -6,6 +6,8 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+import static java.util.stream.Collectors.toList;
+
 public class TaskList {
     private ArrayList<Task> tasks;
     public final int MIN_DESCRIPTION_LENGTH = 2;
@@ -99,6 +101,20 @@ public class TaskList {
             ui.printTasksInList(tasks);
         }catch (DukeException e){
             ui.printListIsEmptyMessage();
+        }
+    }
+
+    public void findSpecificTask(String line,Ui ui,Storage storage){
+        try{
+            ArrayList<Task> filteredTaskList = (ArrayList<Task>) tasks.stream()
+                    .filter((t) -> t.getDescription().contains(line))
+                    .collect(toList());
+            if(filteredTaskList.size() == 0){
+                throw new DukeException();
+            }
+            ui.printFilteredTaskList(filteredTaskList);
+        } catch (DukeException e){
+            ui.printNoMatchingTaskMessage();
         }
     }
 

@@ -22,6 +22,8 @@ public class Parser {
             return new DoneCommand(line);
         } else if (upperLine.startsWith("DELETE")){
             return new DeleteCommand(line);
+        } else if (upperLine.startsWith("FIND")){
+            return new FindCommand(line);
         } else {
             throw new DukeException();
         }

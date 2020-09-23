@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Ui {
+public class Ui<printNoMatchingTaskMessage> {
     public static final String LINE = "========================================================";
     private  Scanner in;
 
@@ -86,6 +86,17 @@ public class Ui {
     }
     public void printListIsEmptyMessage(){
         System.out.println("Your list is empty! :0");
+    }
+
+    public void printNoMatchingTaskMessage(){
+        System.out.println("OOPS! I cant find what you are looking for :(");
+    }
+
+    public void printFilteredTaskList(ArrayList<Task> filterTaskList){
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < filterTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + filterTaskList.get(i));
+        }
     }
 
 }
