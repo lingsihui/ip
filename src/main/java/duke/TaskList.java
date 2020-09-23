@@ -38,6 +38,8 @@ public class TaskList {
     /**
      * Process the user input of an Event task to task description and at description.
      * If the event task has a missing /at, a Duke Exception is thrown.
+     * Accept dates in a format yyyy-mm-dd format and
+     * print in a different format MMM dd yyyy
      *
      * @param line  user input of event.
      * @param ui User interface to print error.
@@ -57,24 +59,11 @@ public class TaskList {
             ui.printInvalidDateMessage();
         }
     }
-
-    public String formatDate(String line, int slashPosition) throws DateTimeException{
-        String  dateLine = line.substring(slashPosition);
-        String[] dates = dateLine.split(" ");
-        String oldDate;
-        for (String s : dates) {
-            if (s.contains("-")) {
-                oldDate = s;
-                LocalDate date = LocalDate.parse(oldDate);
-                String newDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-                return line.replace(oldDate, newDate);
-            }
-        }
-        return line;
-    }
     /**
      * Process the user input of a Deadline task to task description and by description.
      * If the deadline task has a missing /by, a Duke Exception is thrown.
+     * Accept dates in a format yyyy-mm-dd format and
+     * print in a different format MMM dd yyyy
      *
      * @param line  user input of event.
      * @param ui User interface to print error.
@@ -93,6 +82,20 @@ public class TaskList {
         } catch (DateTimeException e){
             ui.printInvalidDateMessage();
         }
+    }
+    private String formatDate(String line, int slashPosition) throws DateTimeException{
+        String  dateLine = line.substring(slashPosition);
+        String[] dates = dateLine.split(" ");
+        String oldDate;
+        for (String s : dates) {
+            if (s.contains("-")) {
+                oldDate = s;
+                LocalDate date = LocalDate.parse(oldDate);
+                String newDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                return line.replace(oldDate, newDate);
+            }
+        }
+        return line;
     }
     /**
      * Adds a task to the task list "tasks".
@@ -187,6 +190,13 @@ public class TaskList {
             ui.printListIsEmptyMessage();
         }
     }
+    /**
+     * Filter and show the task list based on user input.
+     * If the list is empty, DukeException is thrown and no matching task message will be shown.
+     *
+     * @param ui  User Interface to show the list and error message.
+     * @param line  user input to filter.
+     */
     public void findSpecificTask(String line,Ui ui){
         try{
             ArrayList<Task> filteredTaskList = (ArrayList<Task>) tasks.stream()
@@ -200,6 +210,14 @@ public class TaskList {
             ui.printNoMatchingTaskMessage();
         }
     }
+    /**
+     * Shows the list in the task of the specific date.
+     * If the list is empty, DukeException is thrown and List is empty message will be shown.
+     * If dates is not in this format yyyy-mm-dd, throws DateTimeException.
+     *
+     * @param ui  User Interface to show the list and error message.
+     * @param date  date to filter.
+     */
     public void showDateList (Ui ui, String date){
         try {
             String formattedDate = formatDate(date,0);
