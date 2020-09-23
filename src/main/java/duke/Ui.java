@@ -1,7 +1,6 @@
 package duke;
 import duke.task.Task;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -86,6 +85,15 @@ public class Ui {
     }
     public void printListIsEmptyMessage(){
         System.out.println("Your list is empty! :0");
+    }
+
+    public void printInvalidDateMessage(){
+        System.out.println("OOPS! Invalid Date Input");
+        System.out.println("Input Date in this format YYYY-MM-DD");
+    }
+
+    public void printInvalidEventOrDeadlineMessage(String type){
+        System.out.println("OOPS! Invalid " + type + " Input");
     }
 
 }

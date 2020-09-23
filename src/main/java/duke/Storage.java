@@ -52,7 +52,7 @@ public class Storage {
             storageTasks.add(new Todo(line));
         } else if (line.startsWith("Event")){
             int slashPosition = line.indexOf("/");
-            storageTasks.add(new Event(line ,slashPosition));;
+            storageTasks.add(new Event(line ,slashPosition));
         } else {
             throw new DukeException();
         }
