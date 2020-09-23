@@ -1,14 +1,1 @@
-|0| Todo read book 
-<<<<<<< HEAD
-|1| Todo read book
-|0| Deadline return book /by monday
-|0| Event meeting /at sunday
-|0| Event meeting /at Sunday
-=======
-|0| Eventt, meetin/at/at, Oct 15 2019]
-|0| Event meeting /at Oct 15 2019
-|0| Event meeting /at Oct 15 2019
-|0| Event meeting /at 2019
-|0| Event meeting /at Oct 15 2019
-|0| Event meeting /at Oct 15 2019
->>>>>>> master
+

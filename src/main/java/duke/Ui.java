@@ -71,8 +71,17 @@ public class Ui {
     public void printListIsEmptyMessage(){
         System.out.println("Your list is empty! :0");
     }
-    public void printErrorToSaveTaskToFile(IOException e){
+    public void printErrorToSaveTaskToFile(IOException e) {
         System.out.println("Something went wrong: " + e.getMessage());
+    }
+    public void printNoMatchingTaskMessage(){
+        System.out.println("OOPS! I cant find what you are looking for :(");
+    }
+    public void printFilteredTaskList(ArrayList<Task> filterTaskList) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < filterTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + filterTaskList.get(i));
+        }
     }
     public void printInvalidDateMessage(){
         System.out.println("OOPS! Invalid Date Input");
