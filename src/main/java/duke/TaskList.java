@@ -127,7 +127,19 @@ public class TaskList {
             ui.printListIsEmptyMessage();
         }
     }
-
+    public void findSpecificTask(String line,Ui ui){
+        try{
+            ArrayList<Task> filteredTaskList = (ArrayList<Task>) tasks.stream()
+                    .filter((t) -> t.getDescription().contains(line))
+                    .collect(toList());
+            if(filteredTaskList.size() == 0){
+                throw new DukeException();
+            }
+            ui.printFilteredTaskList(filteredTaskList);
+        } catch (DukeException e){
+            ui.printNoMatchingTaskMessage();
+        }
+    }
     public void showDateList (Ui ui, String date){
         try {
             String formattedDate = formatDate(date,0);
@@ -145,5 +157,4 @@ public class TaskList {
             ui.printInvalidDateMessage();
         }
     }
-
 }
