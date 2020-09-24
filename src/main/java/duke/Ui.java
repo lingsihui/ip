@@ -53,7 +53,8 @@ public class Ui {
     public void showDeleteTaskMessage(ArrayList<Task> tasks, int taskNum){
         System.out.println("Noted I have removed this task!");
         System.out.println("\t"+ tasks.get(taskNum-1));
-        System.out.println("Now you have " + tasks.size() + " task in the list.");
+        int taskLeft = tasks.size()-1;
+        System.out.println("Now you have " + taskLeft + " task in the list.");
     }
     public void showMarkedTaskMessage(ArrayList<Task> tasks,int taskNum){
         System.out.println("Nice! I've marked this task as done:");

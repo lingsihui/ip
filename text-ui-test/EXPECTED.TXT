@@ -43,6 +43,9 @@ OOPS! Description cannot be empty!
 OOPS! Description cannot be empty!
 ========================================================
 ========================================================
+OOPS! Invalid task to Mark!
+========================================================
+========================================================
 Nice! I've marked this task as done:
 	[D][✓] return book  (by: Monday)
 ========================================================
@@ -58,7 +61,7 @@ Here are the tasks in your list:
 ========================================================
 Noted I have removed this task!
 	[D][✓] return book  (by: Monday)
-Now you have 3 task in the list.
+Now you have 2 task in the list.
 ========================================================
 ========================================================
 OOPS! Invalid task to Delete!
