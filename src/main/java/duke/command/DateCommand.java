@@ -10,7 +10,7 @@ import duke.Ui;
  * any commands that filters out a task from the tasklist using specific date.
  */
 public class DateCommand extends Command{
-    public static final int DATE_LENGTH = 5;
+    public static final int DATE_LENGTH = 4;
     private String date;
     /**
      * Constructor for DateCommand()

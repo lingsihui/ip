@@ -1,1 +1,14 @@
-
+|1| Event meeying /at sunday
+|1| Deadline return book /by tuesday
+|0| Event project meeting /at monday
+|0| Event project meeting /at Mon 2-4pm
+|0| Event project meeting /at Mon 2-4pm
+|0| Event meeting /at 2019-10-15
+|0| Event meeting /at Oct 15 2019
+|0| Event meeting /at 2019-10
+|0| Event meeting /at -4pm
+|0| Event meeting /at 2019-10
+|0| Event meeting /at sunday Oct 15 2019
+|0| Deadline do homework /by no idea :-p
+|0| Event meeting /at 2019-10
+|0| Event meeting /at Oct 15 2019

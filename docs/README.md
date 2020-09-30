@@ -58,15 +58,21 @@ Example of usage:
 
 Expected outcomes:
 
-* `Got it. I've added this task:
+ ```
+  Got it. I've added this task:
  	[T][✘] read book
- Now you have 1 task in the list.`
- * `Got it. I've added this task:
+ Now you have 1 task in the list.
+ ```
+   ```
+   Got it. I've added this task:
  	[D][✘] return book  (by: Monday)
- Now you have 2 task in the list.`
- * `Got it. I've added this task:
+ Now you have 2 task in the list.
+ ```
+  ```
+   Got it. I've added this task:
  	[E][✘] meeting  (at: Sunday)
- Now you have 3 task in the list.`
+ Now you have 3 task in the list.
+ ```
  </p>
  
  _**Important tips**_ : 
@@ -76,21 +82,34 @@ Expected outcomes:
  will be shown : 
     * e.g. : `event meeting /at 2019-10-15`, 
      outcome: 
-    `Got it. I've added this task:
+    ```
+   Got it. I've added this task:
     	[E][✘] meeting  (at: Oct 15 2019)
-    Now you have 3 task in the list.`
+    Now you have 3 task in the list.
+   ```
     * e.g : `event meeting /at 2019-10`
     outcome: 
-    `OOPS! Invalid Date Input
-    Input Date in this format YYYY-MM-DD`
+    ```
+   OOPS! Invalid Date Input
+    Input Date in this format YYYY-MM-DD
+   ```
  * If any tasks have missing description, 
  an error message will be shown.:
     * e.g. : `event /at`, `todo`, `deadline /by`
-    outcome : `OOPS! Description cannot be empty!`
+    outcome : 
+    ```
+    OOPS! Description cannot be empty!
+   ```
  * If event task has a missing /at, or a deadline task has 
  a missing /by: 
     * e.g. : `event` , `deadline`
-    outcome : `OOPS! Invalid Event Input`, `OOPS! Invalid Deadline Input`
+    outcome : 
+    ```
+    OOPS! Invalid Event Input
+   ``` 
+   ```
+   OOPS! Invalid Deadline Input
+   ```
  
 ### Delete task - `delete`
 This command deletes a task in the task list.
@@ -106,9 +125,11 @@ Example of usage:
 * `delete 2` 
 Expected outcomes:
 
-* `Noted I have removed this task!
+* ```
+  Noted I have removed this task!
    	[D][✓] return book  (by: Monday)
-   Now you have 2 task in the list.`
+   Now you have 2 task in the list.
+  ```
  </p>
  
  _**Important tips**_ : 
@@ -117,7 +138,9 @@ Expected outcomes:
  larger than task size.  
     * e.g. : `done`, 
      outcome: 
-    `OOPS! Invalid task to Delete!`
+    ```
+    OOPS! Invalid task to Delete!
+    ```
     
 ### Show tasks on a specific date - `date`
 This command shows the deadline tasks and event tasks 
@@ -132,19 +155,26 @@ Example of usage:
 * `date 2019-10-15` 
 
 * Expected outcomes:
-`Here are the tasks in your list:
-   1 [E][✘] meeting  (at: Oct 15 2019)
-   2 [D][✘] meeting  (by: Oct 15 2019)`
+```
+Here are the tasks in your list:
+   1. [E][✘] meeting  (at: Oct 15 2019)
+   2. [D][✘] meeting  (by: Oct 15 2019)
+```
  
  _**Important tips**_ : 
 * Date format has to be correct. 
     * e.g : `date 2019-10-1`
     outcome: 
-    `OOPS! Invalid Date Input
-    Input Date in this format YYYY-MM-DD`
+    ```
+    OOPS! Invalid Date Input
+    Input Date in this format YYYY-MM-DD
+    ```
 * Shows that the list is empty when there is no 
 event task or deadline task happening/ due on the date.:
-    * outcome: `Your list is empty! :0`
+    * outcome: 
+    ```
+    Your list is empty! :0
+    ```
     
 ### Mark task as done - `done`
 This command marks a task in the task list as done.
@@ -160,8 +190,10 @@ Example of usage:
 * `done 2` 
 Expected outcomes:
 
-* `Nice! I've marked this task as done:
-   	[D][✓] return book  (by: Monday)`
+* ```
+  Nice! I've marked this task as done:
+   	[D][✓] return book  (by: Monday)
+  ```
  </p>
  
  _**Important tips**_ : 
@@ -170,7 +202,9 @@ Expected outcomes:
  larger than task size.  
     * e.g. : `mark 10`, task list size = 9
      outcome: 
-    `OOPS! Invalid task to Mark!`
+    ```
+    OOPS! Invalid task to Mark!
+    ```
     
 ### Find tasks in the list - `find`
 This command finds the specific task according to the user input.
@@ -184,13 +218,18 @@ Example of usage:
 * `find book` 
 
 * Expected outcomes:
-`Here are the matching tasks in your list:
- 1 [T][✘] read book`
+```
+Here are the matching tasks in your list:
+ 1. [T][✘] read book
+```
  
  _**Important tips**_ : 
 * If there is no matching object as user input, 
 it shows error message :
-    * outcome: `OOPS! I cant find what you are looking for :(`
+    * outcome: 
+    ```
+    OOPS! I cant find what you are looking for :(
+    ```
 
 ### Show all the tasks in the list - `list`
 This command shows all the task in the list.
@@ -204,28 +243,35 @@ Example of usage:
 * `list` 
 
 * Expected outcomes:
-`Here are the tasks in your list:
- 1 [T][✘] read book
- 2 [D][✓] return book  (by: Monday)
- 3 [E][✘] meeting  (at: Sunday)`
+```
+Here are the tasks in your list:
+ 1. [T][✘] read book
+ 2. [D][✓] return book  (by: Monday)
+ 3. [E][✘] meeting  (at: Sunday)
+```
  
  _**Important tips**_ : 
 * If there is no task in your list, 
 it shows error message :
-    * outcome: `Your list is empty! :0`
+    * outcome: 
+    ```
+    Your list is empty! :0
+    ```
     
 ### Exit Duke  Command
 This command exit DUKE.
 <p>
 format: 
 
-`bye`,
+`bye`
 </p>
 Example of usage: 
 
 * `bye` 
 
 * Expected outcomes:
-`Bye. Hope to see you again soon!`
+```
+Bye. Hope to see you again soon!
+```
  
     

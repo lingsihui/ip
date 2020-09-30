@@ -4,10 +4,13 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.DateTimeException;
+import java.util.Date;
 
 import static java.util.stream.Collectors.toList;
 
@@ -18,6 +21,7 @@ import static java.util.stream.Collectors.toList;
 public class TaskList {
     private ArrayList<Task> tasks;
     public final int MIN_DESCRIPTION_LENGTH = 2;
+    public static final int FIND_LENGTH = 5;
 
     /**
      * Constructor.
@@ -83,12 +87,12 @@ public class TaskList {
             ui.printInvalidDateMessage();
         }
     }
-    private String formatDate(String line, int slashPosition) throws DateTimeException{
+    private String formatDate(String line, int slashPosition) throws DateTimeException {
         String  dateLine = line.substring(slashPosition);
         String[] dates = dateLine.split(" ");
         String oldDate;
         for (String s : dates) {
-            if (s.contains("-")) {
+            if (s.matches(".*\\d.*-.*\\d.*-.*\\d.*")) {
                 oldDate = s;
                 LocalDate date = LocalDate.parse(oldDate);
                 String newDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
@@ -139,6 +143,8 @@ public class TaskList {
             storage.updateTaskToFile(tasks,ui);
         }catch (DukeException e) {
             ui.showInvalidTaskToMarkAndDelete("Delete");
+        } catch (NumberFormatException e){
+            ui.showInvalidTaskToMarkAndDelete("Delete");
         }
     }
     /**
@@ -161,13 +167,18 @@ public class TaskList {
             storage.updateTaskToFile(tasks,ui);
         } catch (DukeException e) {
             ui.showInvalidTaskToMarkAndDelete("Mark");
+        } catch (NumberFormatException e){
+            ui.showInvalidTaskToMarkAndDelete("Mark");
         }
     }
-    private int processTaskToDelete(String line) throws DukeException {
+    private int processTaskToDelete(String line) throws DukeException, NumberFormatException {
         if(!line.contains(" ")){
             throw new DukeException();
         }
         String[] words = line.split(" ");
+        if(words.length < 2){
+            throw new DukeException();
+        }
         int taskNum = Integer.parseInt(words[1]);
         if (taskNum > tasks.size()) {
             throw new DukeException();

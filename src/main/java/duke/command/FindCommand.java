@@ -10,8 +10,8 @@ import duke.Ui;
  * any commands that finds a task from the task list using specific input.
  */
 public class FindCommand extends Command{
-    public static final int FIND_LENGTH = 5;
     private String objectToFind;
+    public static final int FIND_LENGTH = 4;
     /**
      * Constructor for FindCommand()
      * Initialise input to be filtered.

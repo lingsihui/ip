@@ -1,27 +1,40 @@
-todo read book
-deadline return book /by Monday
-event meeting /at Sunday
-hello
+list
 todo
-event
+todo read book
+list
 deadline
-event /at
+deadline return book
+deadline return book /by Monday
+deadline /by Monday
 deadline /by
+deadline meeting /by 2019-10
+deadline meeting /by 2019-10-15
+deadline meeting /by 2019-10-100
+event
+event meeting
+event meeting /at Sunday 1-2pm
+event /at Sunday 1-2pm
+event /at
+event meeting /at 2019-10
+event meeting /at 2019-10-15
+event meeting /at 2019-10-100
+list
 done
+done borrow book
 done 2
-done 5
+done 300
 list
 delete 2
 delete 5
+delete
+delete borrow book
+delete 100
 list
+find
 find h
 find book
-event meeting /at 2019-10
-event meeting /at 2019-10-15
-deadline meeting /by 2019-10
-deadline meeting /by 2019-10-15
 date 2019-10-15
-date 2019-10-1
-date 2019-10-11
+date 2019-10-110
 list
+blah
 bye
