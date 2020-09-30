@@ -21,7 +21,7 @@ delete, find, date, done, list and exit commands.
 Note the following format used in this document:
 <p>
 e.g. `Command` 
-A grey highlight (called a mark-up) indicates that this 
+A grey highlight (mark-up) indicates that this 
 is a command that can be typed into the command line and
 executed by the application. 
 </p>
@@ -78,7 +78,7 @@ Expected outcomes:
  _**Important tips**_ : 
  * For Event and Delete tasks: Accept dates in a format 
  yyyy-mm-dd format and print in a different format 
- MMM dd yyy. If date is not in a proper format, error message
+ MMM dd yyy. If date is not valid, error message
  will be shown : 
     * e.g. : `event meeting /at 2019-10-15`, 
      outcome: 
@@ -87,7 +87,7 @@ Expected outcomes:
     	[E][✘] meeting  (at: Oct 15 2019)
     Now you have 3 task in the list.
    ```
-    * e.g : `event meeting /at 2019-10`
+    * e.g : `event meeting /at 2019-10-113`
     outcome: 
     ```
    OOPS! Invalid Date Input
@@ -134,7 +134,7 @@ Expected outcomes:
  
  _**Important tips**_ : 
  * Invalid task to be deleted includes: 
- Missing task Number to be deleted, and task Number parameter 
+ Missing task Number to be deleted,task Number is not a number and task Number parameter 
  larger than task size.  
     * e.g. : `done`, 
      outcome: 
@@ -163,7 +163,7 @@ Here are the tasks in your list:
  
  _**Important tips**_ : 
 * Date format has to be correct. 
-    * e.g : `date 2019-10-1`
+    * e.g : `date 2019-10-113`
     outcome: 
     ```
     OOPS! Invalid Date Input
@@ -198,7 +198,7 @@ Expected outcomes:
  
  _**Important tips**_ : 
  * Invalid task to be marked includes: 
- Missing task Number to be marked, and task Number parameter 
+ Missing task Number to be marked,task Number is not a number, and task Number parameter 
  larger than task size.  
     * e.g. : `mark 10`, task list size = 9
      outcome: 

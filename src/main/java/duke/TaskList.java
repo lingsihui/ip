@@ -153,7 +153,8 @@ public class TaskList {
      * If the task to be marked is invalid, a DukeException is thrown,
      * and prints Invalid Task to mark message.
      * Format : Done 2
-     * Invalid format includes: Missing spaces, task Number to be marked larger than task size.
+     * Invalid format includes: Missing spaces, task Number not a number,
+     * task Number to be marked larger than task size.
      *
      * @param line TaskNumber of the task to be marked.
      * @param ui User interface to show the task marked.
